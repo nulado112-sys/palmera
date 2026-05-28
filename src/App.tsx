@@ -6,7 +6,7 @@ const App: React.FC = () => {
   const [selectedChalet, setSelectedChalet] = useState('ocean')
 
   const handleWhatsApp = (message?: string) => {
-    const defaultMessage = 'Hi! I would like to book a stay at Palmera Beach Resort. Please send me more information.'
+    const defaultMessage = 'Hello! I would like to inquire about booking a stay at Palmera Beach Resort. Could you please provide me with more information?'
     const whatsappMessage = encodeURIComponent(message || defaultMessage)
     window.open(`https://wa.me/96171982549?text=${whatsappMessage}`, '_blank')
   }
@@ -18,39 +18,39 @@ const App: React.FC = () => {
 
   const chalets = {
     ocean: {
-      name: "Ocean View Suite",
+      name: "Mediterranean Suite",
       price: "$180",
       period: "night",
       image: "🌊",
-      description: "Wake up to endless Mediterranean views from your private balcony. This suite features floor-to-ceiling windows and a king-sized bed positioned perfectly for sunrise viewing.",
-      amenities: ["Private balcony", "King bed", "Sea view", "Kitchenette", "Free WiFi"]
+      description: "Perched above crystalline waters with panoramic Mediterranean views. This elegantly appointed suite features a private terrace, perfect for watching sunrise paint the horizon.",
+      amenities: ["Ocean terrace", "King bedroom", "Panoramic views", "Marble bathroom", "Premium linens"]
     },
     garden: {
-      name: "Garden Villa",
+      name: "Garden Residence",
       price: "$220",
       period: "night", 
       image: "🌿",
-      description: "Surrounded by lush Mediterranean gardens, this spacious villa offers tranquility and direct pool access. Perfect for families or couples seeking privacy.",
-      amenities: ["Garden view", "Pool access", "Two bedrooms", "Full kitchen", "Private patio"]
+      description: "Nestled within our botanical gardens with direct access to the infinity pool. A sanctuary of tranquility where Mediterranean flora frames every window.",
+      amenities: ["Garden courtyard", "Pool access", "Two bedrooms", "Chef's kitchen", "Outdoor dining"]
     },
     sunset: {
-      name: "Sunset Penthouse",
+      name: "Penthouse Collection",
       price: "$350",
       period: "night",
       image: "🌅",
-      description: "Our crown jewel - a penthouse with wraparound terrace offering 270-degree views. Watch spectacular sunsets from your private jacuzzi.",
-      amenities: ["Panoramic views", "Private jacuzzi", "Butler service", "Wine cellar", "Rooftop terrace"]
+      description: "Our signature accommodation offering unparalleled luxury. The wraparound terrace provides 180-degree views where every evening becomes a private sunset celebration.",
+      amenities: ["Private terrace", "Master suite", "Butler service", "Wine collection", "Rooftop jacuzzi"]
     }
   }
 
   return (
     <div className="resort-website">
-      {/* Floating Navigation */}
+      {/* Refined Navigation */}
       <nav className={`floating-nav ${isMenuOpen ? 'nav-open' : ''}`}>
         <div className="nav-content">
           <div className="brand">
             <span className="brand-text">Palmera</span>
-            <span className="brand-dot">•</span>
+            <div className="brand-dot"></div>
           </div>
           
           <button 
@@ -64,18 +64,18 @@ const App: React.FC = () => {
           
           <div className={`nav-menu ${isMenuOpen ? 'menu-visible' : ''}`}>
             <a href="#hero" onClick={() => scrollToSection('hero')}>Home</a>
-            <a href="#story" onClick={() => scrollToSection('story')}>Our Story</a>
-            <a href="#chalets" onClick={() => scrollToSection('chalets')}>Stay</a>
-            <a href="#experience" onClick={() => scrollToSection('experience')}>Experience</a>
-            <a href="#connect" onClick={() => scrollToSection('connect')}>Connect</a>
+            <a href="#story" onClick={() => scrollToSection('story')}>Heritage</a>
+            <a href="#chalets" onClick={() => scrollToSection('chalets')}>Accommodations</a>
+            <a href="#experience" onClick={() => scrollToSection('experience')}>Experiences</a>
+            <a href="#connect" onClick={() => scrollToSection('connect')}>Contact</a>
             <button className="cta-nav" onClick={() => handleWhatsApp()}>
-              Reserve Now
+              Reserve
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Hero Section with Video */}
+      {/* Sophisticated Hero */}
       <section id="hero" className="hero-area">
         <video className="hero-video" autoPlay muted loop playsInline>
           <source src="/resort-hero.mp4" type="video/mp4" />
@@ -85,63 +85,62 @@ const App: React.FC = () => {
         
         <div className="hero-content">
           <div className="hero-text">
-            <span className="location-tag">Chekka, Lebanon</span>
+            <span className="location-tag">Chekka, North Lebanon</span>
             <h1 className="hero-title">
-              Where the Mediterranean 
-              <span className="title-accent">meets luxury</span>
+              Mediterranean elegance
+              <span className="title-accent">redefined</span>
             </h1>
             <p className="hero-description">
-              Discover 52 handcrafted chalets nestled between ancient olive groves 
-              and crystal-clear waters. This is more than a stay—it's a story waiting to unfold.
+              Where ancient Lebanese hospitality meets contemporary luxury. 
+              Fifty-two thoughtfully designed accommodations await along our pristine coastline.
             </p>
             
             <div className="hero-actions">
               <button className="primary-cta" onClick={() => handleWhatsApp()}>
-                Begin Your Story
+                Discover Palmera
                 <span className="cta-arrow">→</span>
               </button>
               <button className="ghost-cta" onClick={() => scrollToSection('story')}>
-                Learn More
+                Our Story
               </button>
             </div>
           </div>
-          
-          <div className="hero-stats">
-            <div className="stat-item">
-              <span className="stat-number">52</span>
-              <span className="stat-label">Unique Chalets</span>
-            </div>
-            <div className="stat-divider"></div>
-            <div className="stat-item">
-              <span className="stat-number">4.9</span>
-              <span className="stat-label">Guest Rating</span>
-            </div>
+        </div>
+        
+        <div className="hero-stats">
+          <div className="stat-item">
+            <span className="stat-number">52</span>
+            <span className="stat-label">Accommodations</span>
+          </div>
+          <div className="stat-divider"></div>
+          <div className="stat-item">
+            <span className="stat-number">4.9</span>
+            <span className="stat-label">Guest Rating</span>
           </div>
         </div>
       </section>
 
-      {/* Our Story Section */}
+      {/* Heritage Story */}
       <section id="story" className="story-section">
         <div className="story-container">
           <div className="story-content">
             <div className="story-text">
-              <span className="section-label">Our Story</span>
+              <span className="section-label">Our Heritage</span>
               <h2 className="story-title">
-                Born from a love affair with 
-                <em>the Lebanese coast</em>
+                Three decades of 
+                <em>Lebanese hospitality</em>
               </h2>
               <p className="story-paragraph">
-                Three generations ago, my grandfather fell in love with this stretch of coastline. 
-                What started as a small fishing retreat has grown into something extraordinary—
-                a place where Mediterranean traditions meet contemporary comfort.
+                In 1987, what began as a family's vision has evolved into Lebanon's most distinctive coastal retreat. 
+                Our commitment remains unchanged: to create extraordinary experiences that honor both our Mediterranean setting and Lebanese traditions.
               </p>
               <p className="story-paragraph">
-                Every chalet tells a story. Every sunset is a memory. Every guest becomes 
-                part of our family's continuing narrative along these ancient shores.
+                Each accommodation is thoughtfully positioned to embrace the natural beauty of our coastline, 
+                while our dedicated team ensures every detail reflects the warmth and generosity that defines Lebanese hospitality.
               </p>
               
               <div className="story-signature">
-                <span className="signature-text">— Fouad Palmera, Founder</span>
+                <span className="signature-text">— The Palmera Family</span>
               </div>
             </div>
             
@@ -149,12 +148,12 @@ const App: React.FC = () => {
               <div className="image-stack">
                 <div className="image-card primary">
                   <div className="image-placeholder sunset">
-                    <span className="image-label">Mediterranean Sunsets</span>
+                    <span className="image-label">Coastal Serenity</span>
                   </div>
                 </div>
                 <div className="image-card secondary">
                   <div className="image-placeholder heritage">
-                    <span className="image-label">Heritage & Tradition</span>
+                    <span className="image-label">Lebanese Heritage</span>
                   </div>
                 </div>
                 <div className="floating-element">
@@ -166,14 +165,14 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Chalets Showcase */}
+      {/* Refined Accommodations */}
       <section id="chalets" className="chalets-section">
         <div className="chalets-container">
           <div className="section-intro">
-            <h2 className="section-title">Your home away from home</h2>
+            <h2 className="section-title">Distinctive Accommodations</h2>
             <p className="section-subtitle">
-              Choose from our collection of thoughtfully designed chalets, 
-              each offering its own personality and charm.
+              Each residence is individually designed to capture the essence of Mediterranean living 
+              while providing contemporary comfort and privacy.
             </p>
           </div>
           
@@ -187,7 +186,7 @@ const App: React.FC = () => {
                 >
                   <span className="tab-icon">{chalet.image}</span>
                   <span className="tab-name">{chalet.name}</span>
-                  <span className="tab-price">{chalet.price}/{chalet.period}</span>
+                  <span className="tab-price">From {chalet.price}</span>
                 </button>
               ))}
             </div>
@@ -228,9 +227,9 @@ const App: React.FC = () => {
                     
                     <button 
                       className="book-chalet-btn"
-                      onClick={() => handleWhatsApp(`Hi! I'm interested in booking the ${chalet.name}. Could you share availability and rates?`)}
+                      onClick={() => handleWhatsApp(`Good day! I'm interested in learning more about the ${chalet.name} at Palmera Beach Resort. Could you please share availability and current rates?`)}
                     >
-                      Check Availability
+                      Inquire About Availability
                     </button>
                   </div>
                 </div>
@@ -240,12 +239,12 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Experience Section */}
+      {/* Curated Experiences */}
       <section id="experience" className="experience-section">
         <div className="experience-container">
           <div className="section-header">
-            <span className="section-label">The Experience</span>
-            <h2 className="section-title">More than accommodation</h2>
+            <span className="section-label">Experiences</span>
+            <h2 className="section-title">Curated for distinction</h2>
           </div>
           
           <div className="experience-grid">
@@ -256,8 +255,8 @@ const App: React.FC = () => {
                 </div>
               </div>
               <div className="card-content">
-                <h3>Private Beach Access</h3>
-                <p>200 meters of pristine Mediterranean coastline, exclusively for our guests. Crystal-clear waters meet soft sand where ancient civilizations once walked.</p>
+                <h3>Private Coastal Access</h3>
+                <p>Two hundred meters of pristine Mediterranean coastline reserved exclusively for our guests. Crystal-clear waters meet carefully maintained shores in this secluded sanctuary.</p>
               </div>
             </div>
             
@@ -268,8 +267,8 @@ const App: React.FC = () => {
                 </div>
               </div>
               <div className="card-content">
-                <h3>Farm-to-Table Dining</h3>
-                <p>Fresh ingredients from local farmers, prepared with recipes passed down through generations.</p>
+                <h3>Lebanese Culinary Heritage</h3>
+                <p>Authentic flavors prepared with locally sourced ingredients and time-honored recipes passed through generations.</p>
               </div>
             </div>
             
@@ -280,8 +279,8 @@ const App: React.FC = () => {
                 </div>
               </div>
               <div className="card-content">
-                <h3>Wellness & Spa</h3>
-                <p>Rejuvenate with treatments inspired by ancient Mediterranean wellness traditions.</p>
+                <h3>Wellness & Rejuvenation</h3>
+                <p>Restorative treatments inspired by Mediterranean wellness traditions in our tranquil spa sanctuary.</p>
               </div>
             </div>
             
@@ -292,31 +291,31 @@ const App: React.FC = () => {
                 </div>
               </div>
               <div className="card-content">
-                <h3>Water Adventures</h3>
-                <p>Sailing, diving, and water sports equipment available for guests seeking adventure.</p>
+                <h3>Maritime Adventures</h3>
+                <p>Explore the Lebanese coast through curated sailing excursions and water-based activities.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Connect Section */}
+      {/* Contact & Booking */}
       <section id="connect" className="connect-section">
         <div className="connect-container">
           <div className="connect-content">
             <div className="connect-info">
-              <span className="section-label">Get in Touch</span>
-              <h2 className="connect-title">Ready to create memories?</h2>
+              <span className="section-label">Connect With Us</span>
+              <h2 className="connect-title">Plan your visit</h2>
               <p className="connect-description">
-                Our team is here to help craft your perfect Mediterranean escape. 
-                From special celebrations to quiet retreats, we'll make it unforgettable.
+                Our hospitality team is dedicated to crafting experiences that exceed expectations. 
+                From intimate celebrations to extended retreats, we ensure every detail is perfectly orchestrated.
               </p>
               
               <div className="contact-methods">
                 <div className="contact-item">
                   <span className="contact-icon">📞</span>
                   <div className="contact-details">
-                    <span className="contact-label">Call us</span>
+                    <span className="contact-label">Direct Line</span>
                     <span className="contact-value">+961 71 982 549</span>
                   </div>
                 </div>
@@ -329,7 +328,7 @@ const App: React.FC = () => {
                       className="whatsapp-link"
                       onClick={() => handleWhatsApp()}
                     >
-                      Chat with us instantly
+                      Message us directly
                     </button>
                   </div>
                 </div>
@@ -337,7 +336,7 @@ const App: React.FC = () => {
                 <div className="contact-item">
                   <span className="contact-icon">📍</span>
                   <div className="contact-details">
-                    <span className="contact-label">Visit us</span>
+                    <span className="contact-label">Location</span>
                     <span className="contact-value">Chekka, North Lebanon</span>
                   </div>
                 </div>
@@ -346,15 +345,15 @@ const App: React.FC = () => {
             
             <div className="booking-card">
               <div className="card-header">
-                <h3>Start Planning Your Stay</h3>
-                <p>Tell us about your ideal getaway</p>
+                <h3>Reservation Inquiry</h3>
+                <p>Share your preferences and we'll craft the perfect experience</p>
               </div>
               
               <form className="booking-form" onSubmit={(e) => e.preventDefault()}>
                 <div className="form-row">
                   <div className="form-field">
-                    <label>Your Name</label>
-                    <input type="text" placeholder="Enter your full name" />
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Your complete name" />
                   </div>
                   <div className="form-field">
                     <label>Phone Number</label>
@@ -364,38 +363,38 @@ const App: React.FC = () => {
                 
                 <div className="form-row">
                   <div className="form-field">
-                    <label>Check-in</label>
+                    <label>Arrival Date</label>
                     <input type="date" />
                   </div>
                   <div className="form-field">
-                    <label>Check-out</label>
+                    <label>Departure Date</label>
                     <input type="date" />
                   </div>
                 </div>
                 
                 <div className="form-field">
-                  <label>Preferred Chalet</label>
+                  <label>Accommodation Preference</label>
                   <select>
-                    <option value="">Choose your preference</option>
-                    <option value="ocean">Ocean View Suite</option>
-                    <option value="garden">Garden Villa</option>
-                    <option value="sunset">Sunset Penthouse</option>
+                    <option value="">Select your preference</option>
+                    <option value="ocean">Mediterranean Suite</option>
+                    <option value="garden">Garden Residence</option>
+                    <option value="sunset">Penthouse Collection</option>
                   </select>
                 </div>
                 
                 <div className="form-field">
-                  <label>Special Requests</label>
+                  <label>Special Occasions or Preferences</label>
                   <textarea 
-                    placeholder="Anniversary celebration, dietary requirements, special occasions..."
+                    placeholder="Anniversary celebration, dietary considerations, special requests, or any preferences that would enhance your stay..."
                     rows={4}
                   ></textarea>
                 </div>
                 
                 <button 
                   className="form-submit"
-                  onClick={() => handleWhatsApp("Hi! I'd like to make a reservation at Palmera Beach Resort. I've filled out the booking form on your website - could we discuss availability and rates?")}
+                  onClick={() => handleWhatsApp("Hello! I've completed the reservation inquiry form on your website and would like to discuss my accommodation preferences and availability at Palmera Beach Resort.")}
                 >
-                  Send My Request
+                  Submit Inquiry
                 </button>
               </form>
             </div>
@@ -403,23 +402,23 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Elegant Footer */}
       <footer className="site-footer">
         <div className="footer-container">
           <div className="footer-brand">
             <span className="footer-logo">Palmera</span>
             <p className="footer-tagline">
-              Where Mediterranean beauty meets Lebanese hospitality. 
-              Your story begins here.
+              Where Mediterranean elegance meets Lebanese hospitality. 
+              Creating extraordinary experiences since 1987.
             </p>
           </div>
           
           <div className="footer-info">
             <p className="footer-text">
-              © 2024 Palmera Beach Resort, Chekka, Lebanon
+              © 2024 Palmera Beach Resort
             </p>
             <p className="footer-text">
-              Crafted with care for unforgettable experiences
+              Chekka, North Lebanon
             </p>
           </div>
         </div>
