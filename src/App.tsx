@@ -1,9 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './index.css'
 
 const App: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [selectedChalet, setSelectedChalet] = useState('ocean')
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const handleWhatsApp = (message?: string) => {
     const defaultMessage = 'Hello! I would like to inquire about booking a stay at Palmera Beach Resort. Could you please provide me with more information?'
@@ -45,12 +54,11 @@ const App: React.FC = () => {
 
   return (
     <div className="resort-website">
-      {/* Refined Navigation */}
-      <nav className={`floating-nav ${isMenuOpen ? 'nav-open' : ''}`}>
+      {/* Luxury Navigation */}
+      <nav className={`luxury-nav ${scrolled ? 'nav-scrolled' : ''} ${isMenuOpen ? 'nav-open' : ''}`}>
         <div className="nav-content">
           <div className="brand">
-            <span className="brand-text">Palmera</span>
-            <div className="brand-dot"></div>
+            <img src="/palmera-logo.jpg" alt="Palmera Beach Resort" className="brand-logo" />
           </div>
           
           <button 
@@ -64,53 +72,62 @@ const App: React.FC = () => {
           
           <div className={`nav-menu ${isMenuOpen ? 'menu-visible' : ''}`}>
             <a href="#hero" onClick={() => scrollToSection('hero')}>Home</a>
-            <a href="#story" onClick={() => scrollToSection('story')}>Heritage</a>
-            <a href="#chalets" onClick={() => scrollToSection('chalets')}>Accommodations</a>
-            <a href="#experience" onClick={() => scrollToSection('experience')}>Experiences</a>
+            <a href="#story" onClick={() => scrollToSection('story')}>About</a>
+            <a href="#chalets" onClick={() => scrollToSection('chalets')}>Suites</a>
+            <a href="#experience" onClick={() => scrollToSection('experience')}>Dining</a>
+            <a href="#gallery" onClick={() => scrollToSection('gallery')}>Gallery</a>
             <a href="#connect" onClick={() => scrollToSection('connect')}>Contact</a>
-            <button className="cta-nav" onClick={() => handleWhatsApp()}>
-              Reserve
+            <button className="reserve-btn" onClick={() => handleWhatsApp()}>
+              Reserve Now
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Sophisticated Hero */}
-      <section id="hero" className="hero-area">
-        <video className="hero-video" autoPlay muted loop playsInline>
-          <source src="/resort-hero.mp4" type="video/mp4" />
-        </video>
+      {/* Cinematic Hero */}
+      <section id="hero" className="hero-section">
+        <div className="hero-background">
+          <video className="hero-video" autoPlay muted loop playsInline>
+            <source src="/resort-hero.mp4" type="video/mp4" />
+          </video>
+          <div className="hero-overlay"></div>
+        </div>
         
-        <div className="hero-overlay"></div>
-        
-        <div className="hero-content">
-          <div className="hero-text">
-            <span className="location-tag">Chekka, Lebanon</span>
+        <div className="hero-container">
+          <div className="hero-content">
+            <div className="hero-badge">
+              <span>Mediterranean Luxury</span>
+            </div>
             <h1 className="hero-title">
-              Palmera Beach
-              <span className="title-accent">Resort</span>
+              Where Elegance
+              <span className="title-gradient">Meets the Sea</span>
             </h1>
-            <p className="hero-description">
-              Luxury chalets by the Mediterranean Sea
+            <p className="hero-subtitle">
+              Discover unparalleled luxury at Lebanon's most exclusive beachfront destination.
+              A sanctuary where Mediterranean beauty and Lebanese hospitality create memories for a lifetime.
             </p>
             
-            <div className="hero-actions">
-              <button className="primary-cta" onClick={() => handleWhatsApp()}>
-                Book Now
+            <div className="hero-cta">
+              <button className="cta-primary" onClick={() => handleWhatsApp()}>
+                <span>Experience Palmera</span>
+                <div className="cta-arrow">→</div>
               </button>
             </div>
           </div>
-        </div>
-        
-        <div className="hero-stats">
-          <div className="stat-item">
-            <span className="stat-number">52</span>
-            <span className="stat-label">Accommodations</span>
-          </div>
-          <div className="stat-divider"></div>
-          <div className="stat-item">
-            <span className="stat-number">4.9</span>
-            <span className="stat-label">Guest Rating</span>
+          
+          <div className="hero-stats">
+            <div className="stat">
+              <span className="stat-number">52</span>
+              <span className="stat-text">Luxury Suites</span>
+            </div>
+            <div className="stat">
+              <span className="stat-number">200m</span>
+              <span className="stat-text">Private Beach</span>
+            </div>
+            <div className="stat">
+              <span className="stat-number">30+</span>
+              <span className="stat-text">Years Heritage</span>
+            </div>
           </div>
         </div>
       </section>
