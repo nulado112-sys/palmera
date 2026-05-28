@@ -266,7 +266,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-title {
-  font-size: clamp(var(--text-4xl), 8vw, var(--text-6xl));
+  font-size: clamp(2.5rem, 12vw, 4rem);
   font-weight: 500;
   color: white;
   margin-bottom: var(--space-6);
@@ -281,32 +281,35 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-description {
-  font-size: var(--text-lg);
+  font-size: clamp(1rem, 4vw, 1.25rem);
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: var(--space-8);
-  line-height: 1.6;
+  line-height: 1.5;
   font-weight: 300;
 }
 
 .hero-actions {
   display: flex;
   gap: var(--space-4);
-  flex-wrap: wrap;
+  flex-direction: column;
+  max-width: 300px;
 }
 
 .primary-cta {
   background: white;
   color: var(--stone-900);
-  padding: var(--space-4) var(--space-8);
+  padding: 1rem 2.5rem;
   border: none;
   border-radius: 6px;
   font-weight: 600;
-  font-size: var(--text-base);
+  font-size: clamp(1rem, 3.5vw, 1.125rem);
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: var(--space-2);
   transition: all 0.3s ease;
+  width: 100%;
+  justify-content: center;
   box-shadow: var(--shadow-lg);
 }
 

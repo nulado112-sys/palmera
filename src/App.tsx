@@ -85,23 +85,18 @@ const App: React.FC = () => {
         
         <div className="hero-content">
           <div className="hero-text">
-            <span className="location-tag">Chekka, North Lebanon</span>
+            <span className="location-tag">Chekka, Lebanon</span>
             <h1 className="hero-title">
-              Mediterranean elegance
-              <span className="title-accent">redefined</span>
+              Palmera Beach
+              <span className="title-accent">Resort</span>
             </h1>
             <p className="hero-description">
-              Where ancient Lebanese hospitality meets contemporary luxury. 
-              Fifty-two thoughtfully designed accommodations await along our pristine coastline.
+              Luxury chalets by the Mediterranean Sea
             </p>
             
             <div className="hero-actions">
               <button className="primary-cta" onClick={() => handleWhatsApp()}>
-                Discover Palmera
-                <span className="cta-arrow">→</span>
-              </button>
-              <button className="ghost-cta" onClick={() => scrollToSection('story')}>
-                Our Story
+                Book Now
               </button>
             </div>
           </div>
