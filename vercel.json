@@ -1,5 +1,4 @@
 {
-  "projectId": "prj_9CqX3AC36VvMep2iLnqV6zbdTo4a",
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
