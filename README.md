@@ -2,6 +2,8 @@
 
 A premium, luxury beach resort website built with React, TypeScript, and modern web technologies.
 
+🌐 **Live Website**: [View Palmera Beach Resort](https://palmera-beach-resort.vercel.app)
+
 ## 🌟 Features
 
 - **Luxurious Design**: Premium blue & white theme with elegant animations
