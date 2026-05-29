@@ -3,21 +3,24 @@ import './index.css'
 
 const App: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [selectedChalet, setSelectedChalet] = useState('ocean')
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
+      setScrolled(window.scrollY > 100)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   const handleWhatsApp = (message?: string) => {
-    const defaultMessage = 'Hello! I would like to inquire about booking a stay at Palmera Beach Resort. Could you please provide me with more information?'
+    const defaultMessage = 'Hello, I would like to inquire about reservations at Palmera Beach Resort.'
     const whatsappMessage = encodeURIComponent(message || defaultMessage)
-    window.open(`https://wa.me/96171982549?text=${whatsappMessage}`, '_blank')
+    window.open(`https://wa.me/96171813883?text=${whatsappMessage}`, '_blank')
+  }
+
+  const handleCall = () => {
+    window.open('tel:+96171813883', '_self')
   }
 
   const scrollToSection = (id: string) => {
@@ -25,40 +28,32 @@ const App: React.FC = () => {
     setIsMenuOpen(false)
   }
 
-  const chalets = {
-    ocean: {
-      name: "Mediterranean Suite",
-      price: "$180",
-      period: "night",
-      image: "🌊",
-      description: "Perched above crystalline waters with panoramic Mediterranean views. This elegantly appointed suite features a private terrace, perfect for watching sunrise paint the horizon.",
-      amenities: ["Ocean terrace", "King bedroom", "Panoramic views", "Marble bathroom", "Premium linens"]
-    },
-    garden: {
-      name: "Garden Residence",
-      price: "$220",
-      period: "night", 
-      image: "🌿",
-      description: "Nestled within our botanical gardens with direct access to the infinity pool. A sanctuary of tranquility where Mediterranean flora frames every window.",
-      amenities: ["Garden courtyard", "Pool access", "Two bedrooms", "Chef's kitchen", "Outdoor dining"]
-    },
-    sunset: {
-      name: "Penthouse Collection",
-      price: "$350",
-      period: "night",
-      image: "🌅",
-      description: "Our signature accommodation offering unparalleled luxury. The wraparound terrace provides 180-degree views where every evening becomes a private sunset celebration.",
-      amenities: ["Private terrace", "Master suite", "Butler service", "Wine collection", "Rooftop jacuzzi"]
-    }
-  }
-
   return (
-    <div className="resort-website">
-      {/* Luxury Navigation */}
-      <nav className={`luxury-nav ${scrolled ? 'nav-scrolled' : ''} ${isMenuOpen ? 'nav-open' : ''}`}>
-        <div className="nav-content">
-          <div className="brand">
-            <img src="/palmera-logo.jpg" alt="Palmera Beach Resort" className="brand-logo" />
+    <div className="palmera-resort">
+      {/* Professional Navigation */}
+      <header className={`main-header ${scrolled ? 'scrolled' : ''}`}>
+        <nav className="navigation">
+          <div className="nav-brand">
+            <img src="/palmera-logo.jpg" alt="Palmera Beach Resort" className="logo" />
+          </div>
+          
+          <ul className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
+            <li><a href="#home" onClick={() => scrollToSection('home')}>Home</a></li>
+            <li><a href="#about" onClick={() => scrollToSection('about')}>About</a></li>
+            <li><a href="#accommodations" onClick={() => scrollToSection('accommodations')}>Accommodations</a></li>
+            <li><a href="#amenities" onClick={() => scrollToSection('amenities')}>Amenities</a></li>
+            <li><a href="#contact" onClick={() => scrollToSection('contact')}>Contact</a></li>
+          </ul>
+          
+          <div className="nav-actions">
+            <button className="btn-call" onClick={handleCall}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+            <button className="btn-reserve" onClick={() => handleWhatsApp()}>
+              Reserve
+            </button>
           </div>
           
           <button 
@@ -69,344 +64,308 @@ const App: React.FC = () => {
             <span></span>
             <span></span>
           </button>
-          
-          <div className={`nav-menu ${isMenuOpen ? 'menu-visible' : ''}`}>
-            <a href="#hero" onClick={() => scrollToSection('hero')}>Home</a>
-            <a href="#story" onClick={() => scrollToSection('story')}>About</a>
-            <a href="#chalets" onClick={() => scrollToSection('chalets')}>Suites</a>
-            <a href="#experience" onClick={() => scrollToSection('experience')}>Dining</a>
-            <a href="#gallery" onClick={() => scrollToSection('gallery')}>Gallery</a>
-            <a href="#connect" onClick={() => scrollToSection('connect')}>Contact</a>
-            <button className="reserve-btn" onClick={() => handleWhatsApp()}>
-              Reserve Now
-            </button>
-          </div>
-        </div>
-      </nav>
+        </nav>
+      </header>
 
-      {/* Cinematic Hero */}
-      <section id="hero" className="hero-section">
-        <div className="hero-background">
-          <video className="hero-video" autoPlay muted loop playsInline>
+      {/* Hero Section */}
+      <section id="home" className="hero">
+        <div className="hero-media">
+          <video autoPlay muted loop playsInline className="hero-video">
             <source src="/resort-hero.mp4" type="video/mp4" />
           </video>
           <div className="hero-overlay"></div>
         </div>
         
-        <div className="hero-container">
-          <div className="hero-content">
-            <div className="hero-badge">
-              <span>Mediterranean Luxury</span>
-            </div>
-            <h1 className="hero-title">
-              Where Elegance
-              <span className="title-gradient">Meets the Sea</span>
-            </h1>
-            <p className="hero-subtitle">
-              Discover unparalleled luxury at Lebanon's most exclusive beachfront destination.
-              A sanctuary where Mediterranean beauty and Lebanese hospitality create memories for a lifetime.
-            </p>
-            
-            <div className="hero-cta">
-              <button className="cta-primary" onClick={() => handleWhatsApp()}>
-                <span>Experience Palmera</span>
-                <div className="cta-arrow">→</div>
+        <div className="hero-content">
+          <div className="hero-text">
+            <h1>Palmera Beach Resort</h1>
+            <p>Luxury Mediterranean accommodation in Chekka, North Lebanon</p>
+            <div className="hero-actions">
+              <button className="btn-primary" onClick={() => handleWhatsApp()}>
+                Book Your Stay
+              </button>
+              <button className="btn-secondary" onClick={() => scrollToSection('about')}>
+                Explore
               </button>
             </div>
           </div>
           
-          <div className="hero-stats">
-            <div className="stat">
-              <span className="stat-number">52</span>
-              <span className="stat-text">Luxury Suites</span>
+          <div className="hero-info">
+            <div className="info-item">
+              <span className="number">52</span>
+              <span className="label">Rooms & Suites</span>
             </div>
-            <div className="stat">
-              <span className="stat-number">200m</span>
-              <span className="stat-text">Private Beach</span>
+            <div className="info-item">
+              <span className="number">200m</span>
+              <span className="label">Private Beach</span>
             </div>
-            <div className="stat">
-              <span className="stat-number">30+</span>
-              <span className="stat-text">Years Heritage</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Heritage Story */}
-      <section id="story" className="story-section">
-        <div className="story-container">
-          <div className="story-content">
-            <div className="story-text">
-              <span className="section-label">Our Heritage</span>
-              <h2 className="story-title">
-                Three decades of 
-                <em>Lebanese hospitality</em>
-              </h2>
-              <p className="story-paragraph">
-                In 1987, what began as a family's vision has evolved into Lebanon's most distinctive coastal retreat. 
-                Our commitment remains unchanged: to create extraordinary experiences that honor both our Mediterranean setting and Lebanese traditions.
-              </p>
-              <p className="story-paragraph">
-                Each accommodation is thoughtfully positioned to embrace the natural beauty of our coastline, 
-                while our dedicated team ensures every detail reflects the warmth and generosity that defines Lebanese hospitality.
-              </p>
-              
-              <div className="story-signature">
-                <span className="signature-text">— The Palmera Family</span>
-              </div>
-            </div>
-            
-            <div className="story-visual">
-              <div className="image-stack">
-                <div className="image-card primary">
-                  <div className="image-placeholder sunset">
-                    <span className="image-label">Coastal Serenity</span>
-                  </div>
-                </div>
-                <div className="image-card secondary">
-                  <div className="image-placeholder heritage">
-                    <span className="image-label">Lebanese Heritage</span>
-                  </div>
-                </div>
-                <div className="floating-element">
-                  <span className="years-badge">Est. 1987</span>
-                </div>
-              </div>
+            <div className="info-item">
+              <span className="number">1987</span>
+              <span className="label">Established</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Refined Accommodations */}
-      <section id="chalets" className="chalets-section">
-        <div className="chalets-container">
-          <div className="section-intro">
-            <h2 className="section-title">Distinctive Accommodations</h2>
-            <p className="section-subtitle">
-              Each residence is individually designed to capture the essence of Mediterranean living 
-              while providing contemporary comfort and privacy.
-            </p>
-          </div>
-          
-          <div className="chalets-showcase">
-            <div className="chalets-tabs">
-              {Object.entries(chalets).map(([key, chalet]) => (
-                <button
-                  key={key}
-                  className={`chalet-tab ${selectedChalet === key ? 'active' : ''}`}
-                  onClick={() => setSelectedChalet(key)}
-                >
-                  <span className="tab-icon">{chalet.image}</span>
-                  <span className="tab-name">{chalet.name}</span>
-                  <span className="tab-price">From {chalet.price}</span>
-                </button>
-              ))}
-            </div>
-            
-            <div className="chalet-detail">
-              {Object.entries(chalets).map(([key, chalet]) => (
-                <div
-                  key={key}
-                  className={`chalet-card ${selectedChalet === key ? 'visible' : ''}`}
-                >
-                  <div className="chalet-visual">
-                    <div className="chalet-image">
-                      <div className="image-placeholder chalet-bg">
-                        <span className="chalet-emoji">{chalet.image}</span>
-                        <span className="view-label">{chalet.name}</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="chalet-info">
-                    <div className="chalet-header">
-                      <h3 className="chalet-name">{chalet.name}</h3>
-                      <div className="chalet-pricing">
-                        <span className="price">{chalet.price}</span>
-                        <span className="period">per {chalet.period}</span>
-                      </div>
-                    </div>
-                    
-                    <p className="chalet-description">{chalet.description}</p>
-                    
-                    <div className="amenities-list">
-                      {chalet.amenities.map((amenity, index) => (
-                        <span key={index} className="amenity-tag">
-                          {amenity}
-                        </span>
-                      ))}
-                    </div>
-                    
-                    <button 
-                      className="book-chalet-btn"
-                      onClick={() => handleWhatsApp(`Good day! I'm interested in learning more about the ${chalet.name} at Palmera Beach Resort. Could you please share availability and current rates?`)}
-                    >
-                      Inquire About Availability
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Curated Experiences */}
-      <section id="experience" className="experience-section">
-        <div className="experience-container">
+      {/* About Section */}
+      <section id="about" className="about">
+        <div className="container">
           <div className="section-header">
-            <span className="section-label">Experiences</span>
-            <h2 className="section-title">Curated for distinction</h2>
+            <h2>About Palmera</h2>
+            <p>Three decades of Mediterranean hospitality excellence</p>
           </div>
           
-          <div className="experience-grid">
-            <div className="experience-card featured">
-              <div className="card-visual">
-                <div className="image-placeholder beach">
-                  <span className="experience-icon">🏖️</span>
+          <div className="about-content">
+            <div className="about-text">
+              <h3>Mediterranean Elegance</h3>
+              <p>
+                Since 1987, Palmera Beach Resort has been a cornerstone of Lebanese hospitality. 
+                Located on the pristine shores of Chekka, our resort offers an authentic Mediterranean 
+                experience where traditional Lebanese warmth meets modern comfort.
+              </p>
+              <p>
+                Our 52 carefully designed accommodations provide guests with panoramic sea views, 
+                direct beach access, and the personalized service that has defined our reputation 
+                for over three decades.
+              </p>
+              
+              <div className="features">
+                <div className="feature">
+                  <h4>Prime Location</h4>
+                  <p>Direct access to 200 meters of private Mediterranean coastline</p>
                 </div>
-              </div>
-              <div className="card-content">
-                <h3>Private Coastal Access</h3>
-                <p>Two hundred meters of pristine Mediterranean coastline reserved exclusively for our guests. Crystal-clear waters meet carefully maintained shores in this secluded sanctuary.</p>
+                <div className="feature">
+                  <h4>Authentic Cuisine</h4>
+                  <p>Traditional Lebanese dishes and fresh Mediterranean seafood</p>
+                </div>
+                <div className="feature">
+                  <h4>Family Heritage</h4>
+                  <p>Three generations of hospitality excellence since 1987</p>
+                </div>
               </div>
             </div>
             
-            <div className="experience-card">
-              <div className="card-visual">
-                <div className="image-placeholder dining">
-                  <span className="experience-icon">🍽️</span>
+            <div className="about-visual">
+              <div className="image-placeholder">
+                <div className="placeholder-content">
+                  <span>Resort Overview</span>
                 </div>
-              </div>
-              <div className="card-content">
-                <h3>Lebanese Culinary Heritage</h3>
-                <p>Authentic flavors prepared with locally sourced ingredients and time-honored recipes passed through generations.</p>
-              </div>
-            </div>
-            
-            <div className="experience-card">
-              <div className="card-visual">
-                <div className="image-placeholder wellness">
-                  <span className="experience-icon">🧘‍♀️</span>
-                </div>
-              </div>
-              <div className="card-content">
-                <h3>Wellness & Rejuvenation</h3>
-                <p>Restorative treatments inspired by Mediterranean wellness traditions in our tranquil spa sanctuary.</p>
-              </div>
-            </div>
-            
-            <div className="experience-card">
-              <div className="card-visual">
-                <div className="image-placeholder adventure">
-                  <span className="experience-icon">⛵</span>
-                </div>
-              </div>
-              <div className="card-content">
-                <h3>Maritime Adventures</h3>
-                <p>Explore the Lebanese coast through curated sailing excursions and water-based activities.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Contact & Booking */}
-      <section id="connect" className="connect-section">
-        <div className="connect-container">
-          <div className="connect-content">
-            <div className="connect-info">
-              <span className="section-label">Connect With Us</span>
-              <h2 className="connect-title">Plan your visit</h2>
-              <p className="connect-description">
-                Our hospitality team is dedicated to crafting experiences that exceed expectations. 
-                From intimate celebrations to extended retreats, we ensure every detail is perfectly orchestrated.
-              </p>
-              
-              <div className="contact-methods">
-                <div className="contact-item">
-                  <span className="contact-icon">📞</span>
-                  <div className="contact-details">
-                    <span className="contact-label">Direct Line</span>
-                    <span className="contact-value">+961 71 982 549</span>
-                  </div>
+      {/* Accommodations Section */}
+      <section id="accommodations" className="accommodations">
+        <div className="container">
+          <div className="section-header">
+            <h2>Accommodations</h2>
+            <p>Thoughtfully designed rooms and suites with Mediterranean views</p>
+          </div>
+          
+          <div className="rooms-grid">
+            <div className="room-card">
+              <div className="room-image">
+                <div className="placeholder-content">
+                  <span>Sea View Room</span>
                 </div>
-                
-                <div className="contact-item whatsapp-item">
-                  <span className="contact-icon">💬</span>
-                  <div className="contact-details">
-                    <span className="contact-label">WhatsApp</span>
-                    <button 
-                      className="whatsapp-link"
-                      onClick={() => handleWhatsApp()}
-                    >
-                      Message us directly
-                    </button>
-                  </div>
-                </div>
-                
-                <div className="contact-item">
-                  <span className="contact-icon">📍</span>
-                  <div className="contact-details">
-                    <span className="contact-label">Location</span>
-                    <span className="contact-value">Chekka, North Lebanon</span>
-                  </div>
-                </div>
+              </div>
+              <div className="room-content">
+                <h3>Sea View Rooms</h3>
+                <p>Comfortable accommodations with direct Mediterranean views and modern amenities.</p>
+                <ul>
+                  <li>25 sqm</li>
+                  <li>Private balcony</li>
+                  <li>Air conditioning</li>
+                  <li>Mini-bar</li>
+                </ul>
+                <button className="btn-inquire" onClick={() => handleWhatsApp('I would like to inquire about Sea View Room availability and rates.')}>
+                  Inquire
+                </button>
               </div>
             </div>
             
-            <div className="booking-card">
-              <div className="card-header">
-                <h3>Reservation Inquiry</h3>
-                <p>Share your preferences and we'll craft the perfect experience</p>
+            <div className="room-card">
+              <div className="room-image">
+                <div className="placeholder-content">
+                  <span>Premium Suite</span>
+                </div>
+              </div>
+              <div className="room-content">
+                <h3>Premium Suites</h3>
+                <p>Spacious suites with separate living areas and panoramic sea views.</p>
+                <ul>
+                  <li>45 sqm</li>
+                  <li>Separate living room</li>
+                  <li>Large terrace</li>
+                  <li>Kitchenette</li>
+                </ul>
+                <button className="btn-inquire" onClick={() => handleWhatsApp('I would like to inquire about Premium Suite availability and rates.')}>
+                  Inquire
+                </button>
+              </div>
+            </div>
+            
+            <div className="room-card">
+              <div className="room-image">
+                <div className="placeholder-content">
+                  <span>Family Villa</span>
+                </div>
+              </div>
+              <div className="room-content">
+                <h3>Family Villas</h3>
+                <p>Private villas perfect for families with direct beach access.</p>
+                <ul>
+                  <li>70 sqm</li>
+                  <li>2 bedrooms</li>
+                  <li>Private garden</li>
+                  <li>Beach access</li>
+                </ul>
+                <button className="btn-inquire" onClick={() => handleWhatsApp('I would like to inquire about Family Villa availability and rates.')}>
+                  Inquire
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Amenities Section */}
+      <section id="amenities" className="amenities">
+        <div className="container">
+          <div className="section-header">
+            <h2>Resort Amenities</h2>
+            <p>Everything you need for the perfect Mediterranean getaway</p>
+          </div>
+          
+          <div className="amenities-grid">
+            <div className="amenity">
+              <div className="amenity-icon">🏖️</div>
+              <h3>Private Beach</h3>
+              <p>200 meters of exclusive Mediterranean coastline with crystal-clear waters</p>
+            </div>
+            
+            <div className="amenity">
+              <div className="amenity-icon">🍽️</div>
+              <h3>Restaurant</h3>
+              <p>Fresh seafood and authentic Lebanese cuisine with seaside dining</p>
+            </div>
+            
+            <div className="amenity">
+              <div className="amenity-icon">🏊‍♀️</div>
+              <h3>Swimming Pool</h3>
+              <p>Infinity pool overlooking the Mediterranean with pool bar service</p>
+            </div>
+            
+            <div className="amenity">
+              <div className="amenity-icon">🚗</div>
+              <h3>Parking</h3>
+              <p>Complimentary parking for all guests with 24/7 security</p>
+            </div>
+            
+            <div className="amenity">
+              <div className="amenity-icon">📶</div>
+              <h3>WiFi</h3>
+              <p>High-speed internet access throughout the resort property</p>
+            </div>
+            
+            <div className="amenity">
+              <div className="amenity-icon">🛎️</div>
+              <h3>Concierge</h3>
+              <p>24/7 reception and concierge services for all guest needs</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="contact">
+        <div className="container">
+          <div className="section-header">
+            <h2>Contact & Reservations</h2>
+            <p>Ready to experience Mediterranean luxury at Palmera Beach Resort</p>
+          </div>
+          
+          <div className="contact-content">
+            <div className="contact-info">
+              <div className="info-block">
+                <h3>Reservations</h3>
+                <p>Call us directly or send a WhatsApp message for immediate assistance</p>
+                <div className="contact-methods">
+                  <button className="contact-method" onClick={handleCall}>
+                    <span className="method-icon">📞</span>
+                    <div>
+                      <strong>Phone</strong>
+                      <span>+961 71 813 883</span>
+                    </div>
+                  </button>
+                  
+                  <button className="contact-method" onClick={() => handleWhatsApp()}>
+                    <span className="method-icon">💬</span>
+                    <div>
+                      <strong>WhatsApp</strong>
+                      <span>Quick Response</span>
+                    </div>
+                  </button>
+                </div>
               </div>
               
-              <form className="booking-form" onSubmit={(e) => e.preventDefault()}>
-                <div className="form-row">
-                  <div className="form-field">
-                    <label>Full Name</label>
-                    <input type="text" placeholder="Your complete name" />
-                  </div>
-                  <div className="form-field">
-                    <label>Phone Number</label>
-                    <input type="tel" placeholder="+961 XX XXX XXX" />
-                  </div>
+              <div className="info-block">
+                <h3>Location</h3>
+                <p>Chekka, North Lebanon</p>
+                <p>Mediterranean Coastline</p>
+                <p>45 minutes from Beirut</p>
+              </div>
+              
+              <div className="info-block">
+                <h3>Hours</h3>
+                <p>Reception: 24/7</p>
+                <p>Restaurant: 7:00 AM - 11:00 PM</p>
+                <p>Pool Bar: 10:00 AM - 8:00 PM</p>
+              </div>
+            </div>
+            
+            <div className="reservation-form">
+              <h3>Quick Inquiry</h3>
+              <form onSubmit={(e) => e.preventDefault()}>
+                <div className="form-group">
+                  <label>Name</label>
+                  <input type="text" placeholder="Your full name" />
                 </div>
                 
                 <div className="form-row">
-                  <div className="form-field">
-                    <label>Arrival Date</label>
+                  <div className="form-group">
+                    <label>Check-in</label>
                     <input type="date" />
                   </div>
-                  <div className="form-field">
-                    <label>Departure Date</label>
+                  <div className="form-group">
+                    <label>Check-out</label>
                     <input type="date" />
                   </div>
                 </div>
                 
-                <div className="form-field">
-                  <label>Accommodation Preference</label>
+                <div className="form-group">
+                  <label>Guests</label>
                   <select>
-                    <option value="">Select your preference</option>
-                    <option value="ocean">Mediterranean Suite</option>
-                    <option value="garden">Garden Residence</option>
-                    <option value="sunset">Penthouse Collection</option>
+                    <option>1 Guest</option>
+                    <option>2 Guests</option>
+                    <option>3 Guests</option>
+                    <option>4+ Guests</option>
                   </select>
                 </div>
                 
-                <div className="form-field">
-                  <label>Special Occasions or Preferences</label>
-                  <textarea 
-                    placeholder="Anniversary celebration, dietary considerations, special requests, or any preferences that would enhance your stay..."
-                    rows={4}
-                  ></textarea>
+                <div className="form-group">
+                  <label>Message (Optional)</label>
+                  <textarea placeholder="Any special requests or questions..."></textarea>
                 </div>
                 
                 <button 
-                  className="form-submit"
-                  onClick={() => handleWhatsApp("Hello! I've completed the reservation inquiry form on your website and would like to discuss my accommodation preferences and availability at Palmera Beach Resort.")}
+                  type="button" 
+                  className="btn-submit"
+                  onClick={() => handleWhatsApp('Hello, I filled out the inquiry form on your website and would like to discuss availability and rates for my stay at Palmera Beach Resort.')}
                 >
-                  Submit Inquiry
+                  Send Inquiry
                 </button>
               </form>
             </div>
@@ -414,24 +373,33 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Elegant Footer */}
-      <footer className="site-footer">
-        <div className="footer-container">
-          <div className="footer-brand">
-            <span className="footer-logo">Palmera</span>
-            <p className="footer-tagline">
-              Where Mediterranean elegance meets Lebanese hospitality. 
-              Creating extraordinary experiences since 1987.
-            </p>
+      {/* Footer */}
+      <footer className="footer">
+        <div className="container">
+          <div className="footer-content">
+            <div className="footer-brand">
+              <img src="/palmera-logo.jpg" alt="Palmera Beach Resort" className="footer-logo" />
+              <p>Mediterranean luxury since 1987</p>
+            </div>
+            
+            <div className="footer-info">
+              <div className="footer-section">
+                <h4>Contact</h4>
+                <p>+961 71 813 883</p>
+                <p>Chekka, North Lebanon</p>
+              </div>
+              
+              <div className="footer-section">
+                <h4>Quick Links</h4>
+                <a href="#accommodations" onClick={() => scrollToSection('accommodations')}>Rooms</a>
+                <a href="#amenities" onClick={() => scrollToSection('amenities')}>Amenities</a>
+                <a href="#contact" onClick={() => scrollToSection('contact')}>Contact</a>
+              </div>
+            </div>
           </div>
           
-          <div className="footer-info">
-            <p className="footer-text">
-              © 2024 Palmera Beach Resort
-            </p>
-            <p className="footer-text">
-              Chekka, North Lebanon
-            </p>
+          <div className="footer-bottom">
+            <p>&copy; 2024 Palmera Beach Resort. All rights reserved.</p>
           </div>
         </div>
       </footer>
